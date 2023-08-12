@@ -1,0 +1,24 @@
+version: "2.1"
+
+volumes:
+  files-datavolume:
+
+networks:
+  gcp_network:
+      name: "peter"
+      driver: bridge
+      external: true
+
+services:
+  peter.api:
+    labels:
+      svc: "peter-api"
+    restart: always
+    container_name: peter.api
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000"
+    networks:
+      - gcp_network
